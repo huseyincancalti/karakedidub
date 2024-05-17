@@ -26,7 +26,6 @@ body {
     transform: translate(-50%, -50%);
 }
 
-
 .container {
     background: transparent;
     backdrop-filter: blur(4px);
@@ -49,7 +48,6 @@ body {
 .video-background:hover #background-video {
     transform: scale(1.1);
 }
-
 
 .photo img {
     height: 350px;
@@ -77,6 +75,7 @@ body {
     font-size: 30px;
     line-height: 1.5;
     margin-bottom: 20px;
+    color: aliceblue;
 }
 
 ::-webkit-scrollbar {
@@ -100,22 +99,18 @@ body {
     display: none;
 }
 
-
-
 .photo {
     filter: drop-shadow(10px 7px 10px black);
 }
 
 .social-media {
-    width: 50;
-    height: 50;
     display: flex;
     justify-content: center;
     gap: 20px;
 }
 
 .social-media a {
-    color: #fff;
+    color: aliceblue;
     text-decoration: none;
     padding: 10px;
     border-radius: 5px;
@@ -140,7 +135,6 @@ body {
     transition: transform 0.6s ease, border-radius 0.6s ease;
 }
 
-
 .social-media a.instagram {
     border-color: rgba(225, 48, 108, 0);
 }
@@ -152,7 +146,6 @@ body {
 .social-media a.discord {
     border-color: rgba(114, 137, 218, 0);
 }
-
 
 .social-media a.instagram:hover {
     border-color: rgba(225, 48, 108, 1);
@@ -170,4 +163,42 @@ body {
     width: 75px;
     height: 75px;
     margin-bottom: 10px;
+}
+
+@media (max-width: 768px) {
+    .container {
+        max-width: 90%;
+        padding: 20px;
+    }
+
+    .photo img {
+        height: 200px;
+        width: 200px;
+    }
+
+    .intro p {
+        font-size: 20px;
+    }
+
+    .social-media {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .social-media a img {
+        width: 50px;
+        height: 50px;
+    }
+
+    .social-media a {
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-start;
+        padding: 10px 20px;
+    }
+
+    .social-media a span {
+        margin-left: 10px;
+        font-size: 16px;
+    }
 }
