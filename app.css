@@ -1,0 +1,178 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.video-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: -1;
+}
+
+#background-video {
+    width: 120%; /* Videoyu büyütün */
+    height: 120%;
+    object-fit: cover;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%); /* Videoyu ortalamak için */
+}
+
+
+.container {
+    background: transparent;
+    backdrop-filter: blur(4px);
+    padding: 50px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    border-radius: 15px; /* Kenarları dairesel yapmak için */
+    max-width: 60%; /* Maksimum genişlik */
+    height: 70%; /* Yükseklik yüzde olarak ayarlanabilir */
+    margin: auto; /* Sayfa ortasına hizalama */
+    position: absolute; /* Diğer içeriklerle örtüşmemesi için */
+    top: 0; bottom: 0; left: 0; right: 0; /* Diğer içeriklerle örtüşmemesi için */
+    overflow: auto; /* İçeriği aşırı durumda görüntülemek için */
+}
+
+.photo {
+    position: relative;
+}
+
+.video-background:hover #background-video {
+    transform: scale(1.1);
+}
+
+
+.photo img {
+    height: 350px;
+    width: 350px;
+    display: block;
+    margin: 0 auto 20px auto;
+    transition: transform 0.3s;
+}
+
+.photo img:hover {
+    transform: scale(1.1);
+}
+
+.photo a {
+    display: block;
+    width: fit-content;
+    margin: 0 auto;
+}
+
+.intro {
+    margin-bottom: 20px;
+}
+
+.intro p {
+    font-size: 30px; /* Paragraf metin boyutunu 24 piksel olarak ayarlar */
+    line-height: 1.5; /* Metin aralığını belirler */
+    margin-bottom: 20px; /* Paragraf alt boşluğunu belirler */
+}
+
+/* Webkit tabanlı tarayıcılarda scrollbar'ı seçmek için */
+::-webkit-scrollbar {
+    width: 10px; /* Scrollbar genişliği */
+}
+
+/* Dikey scrollbar için */
+::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.3); /* Scrollbar rengi */
+    border-radius: 10px; /* Scrollbar köşe yarıçapı */
+}
+
+/* Dikey scrollbar üzerine gelindiğinde */
+::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(0, 0, 0, 0.5); /* Scrollbar hover rengi */
+}
+
+/* Yatay scrollbar için */
+::-webkit-scrollbar-track {
+    background-color: transparent; /* Scrollbar track rengi */
+}
+
+/* Scrollbar butonu (oklar) */
+::-webkit-scrollbar-button {
+    display: none; /* Scrollbar butonlarını gizle */
+}
+
+
+
+.photo {
+    filter: drop-shadow(10px 7px 10px black);
+}
+
+.social-media {
+    width: 50;
+    height: 50;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.social-media a {
+    color: #fff;
+    text-decoration: none;
+    padding: 10px;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: transform 0.3s;
+    background: black; /* Hafif bulanık gradient */
+    border: 2px solid transparent;
+    transition: transform 0.6s ease, border-radius 0.6s ease; /* Transformasyon ve border-radius animasyonu */
+}
+
+.social-media a:hover {
+    transform: scale(1.1);
+    border-radius: 50%; /* Köşe yarıçapını değiştir */
+    transition: transform 0.6s ease, border-radius 0.6s ease; /* Üzerine gelince %110 büyüme ve border-radius değişimi, 0.60 saniyede tamamlanacak */
+}
+
+.social-media a:not(:hover) {
+    transform: scale(0.9);
+    border-radius: 5px; /* Köşe yarıçapını eski haline getir */
+    transition: transform 0.6s ease, border-radius 0.6s ease; /* Üzerinden gidince %90 küçülme ve border-radius değişimi, 0.60 saniyede tamamlanacak */
+}
+
+
+.social-media a.instagram {
+    border-color: rgba(225, 48, 108, 0);
+}
+
+.social-media a.youtube {
+    border-color: rgba(255, 0, 0, 0);
+}
+
+.social-media a.discord {
+    border-color: rgba(114, 137, 218, 0);
+}
+
+
+.social-media a.instagram:hover {
+    border-color: rgba(225, 48, 108, 1);
+}
+
+.social-media a.youtube:hover {
+    border-color: rgba(255, 0, 0, 1);
+}
+
+.social-media a.discord:hover {
+    border-color: rgba(114, 137, 218, 1);
+}
+
+.social-media a img {
+    width: 75px;
+    height: 75px;
+    margin-bottom: 10px;
+}
