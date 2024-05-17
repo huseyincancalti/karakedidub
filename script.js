@@ -1,4 +1,3 @@
-
 let originalTitle = document.title;
 
 window.addEventListener("blur", () => {
@@ -7,4 +6,9 @@ window.addEventListener("blur", () => {
 
 window.addEventListener("focus", () => {
     document.title = originalTitle;
+});
+
+document.getElementById("refresh-link").addEventListener("click", (event) => {
+    event.preventDefault();
+    location.reload();
 });
