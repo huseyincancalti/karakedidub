@@ -147,6 +147,10 @@ body {
     border-color: rgba(114, 137, 218, 0);
 }
 
+.social-media a.github {
+    border-color: rgba(0, 0, 0, 0);
+}
+
 .social-media a.instagram:hover {
     border-color: rgba(225, 48, 108, 1);
 }
@@ -157,6 +161,10 @@ body {
 
 .social-media a.discord:hover {
     border-color: rgba(114, 137, 218, 1);
+}
+
+.social-media a.github:hover {
+    border-color: white;
 }
 
 .social-media a img {
@@ -191,14 +199,28 @@ body {
     }
 
     .social-media a {
-        flex-direction: row;
+        flex-direction: column;
         align-items: center;
-        justify-content: flex-start;
-        padding: 10px 20px;
+        padding: 10px 0;
     }
 
     .social-media a span {
-        margin-left: 10px;
+        margin-top: 10px;
         font-size: 16px;
+    }
+
+    .social-media a {
+        border-radius: 5px !important;
+        transition: none !important;
+    }
+
+    .social-media a:hover {
+        transform: none !important;
+        border-radius: 5px !important;
+    }
+
+    .social-media a:not(:hover) {
+        transform: none !important;
+        border-radius: 5px !important;
     }
 }
