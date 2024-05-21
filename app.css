@@ -39,7 +39,9 @@ body {
     position: absolute;
     top: 0; bottom: 0; left: 0; right: 0;
     overflow: auto;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 1);
 }
+
 
 .photo {
     position: relative;
@@ -54,7 +56,7 @@ body {
     width: 350px;
     display: block;
     margin: 0 auto 20px auto;
-    transition: transform 0.3s;
+    transition: transform 0.5s;
 }
 
 .photo img:hover {
@@ -69,6 +71,7 @@ body {
 
 .intro {
     margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 1);
 }
 
 .intro p {
@@ -117,22 +120,24 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    transition: transform 0.3s;
-    background: black;
-    border: 2px solid transparent;
     transition: transform 0.6s ease, border-radius 0.6s ease;
+    background: rgba(0, 0, 0, 0.7);
+    border: 2px solid transparent;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+    position: relative;
+    overflow: hidden;
 }
 
 .social-media a:hover {
     transform: scale(1.1);
     border-radius: 50%;
-    transition: transform 0.6s ease, border-radius 0.6s ease;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+    text
 }
 
 .social-media a:not(:hover) {
     transform: scale(0.9);
     border-radius: 5px;
-    transition: transform 0.6s ease, border-radius 0.6s ease;
 }
 
 .social-media a.instagram {
@@ -152,19 +157,23 @@ body {
 }
 
 .social-media a.instagram:hover {
-    border-color: rgba(225, 48, 108, 1);
+    border-image: linear-gradient(45deg, transparent, #405ce600);
+    box-shadow: 0 0 20px #e1306c;
 }
 
 .social-media a.youtube:hover {
-    border-color: rgba(255, 0, 0, 1);
+    border-image: linear-gradient(45deg, #ff0000, transparent(21, 0, 255, 0));
+    box-shadow: 0 0 20px #ff0000;
 }
 
 .social-media a.discord:hover {
-    border-color: rgba(114, 137, 218, 1);
+    border-image: linear-gradient(45deg, #7289da, transparent(21, 0, 255, 0));
+    box-shadow: 0 0 20px #7289da;
 }
 
 .social-media a.github:hover {
-    border-color: white;
+    border-image: linear-gradient(45deg, rgba(255, 255, 255, 0.8), transparent(21, 0, 255, 0));
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
 }
 
 .social-media a img {
@@ -183,7 +192,7 @@ body {
         height: 200px;
         width: 200px;
     }
-
+    
     .intro p {
         font-size: 20px;
     }
@@ -204,19 +213,31 @@ body {
         padding: 10px 0;
     }
 
+    .social-media a:hover span {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
     .social-media a span {
         margin-top: 10px;
         font-size: 16px;
+        opacity: 1; 
+        transition: opacity 0.3s ease;
+        position: absolute;
+        position: relative;
+        transform: translateY(-100%);
     }
 
     .social-media a {
         border-radius: 5px !important;
         transition: none !important;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.5) !important;
     }
 
     .social-media a:hover {
         transform: none !important;
         border-radius: 5px !important;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.8) !important;
     }
 
     .social-media a:not(:hover) {
