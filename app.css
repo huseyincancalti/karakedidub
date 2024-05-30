@@ -28,7 +28,7 @@ body {
 
 .container {
     background: transparent;
-    backdrop-filter: blur(4px);
+    backdrop-filter: blur(2px);
     padding: 50px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     text-align: center;
