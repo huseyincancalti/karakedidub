@@ -28,23 +28,25 @@ body {
 
 .container {
     background: transparent;
-    backdrop-filter: blur(0.5px);
-    padding: 50px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(0px);
+    padding: 0;
+    box-shadow: none;
     text-align: center;
-    border-radius: 15px;
-    max-width: 60%;
-    height: 70%;
-    margin: auto;
-    position: absolute;
-    top: 0; bottom: 0; left: 0; right: 0;
-    overflow: auto;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 1);
+    border-radius: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
-
 
 .photo {
     position: relative;
+    filter: drop-shadow(10px 7px 10px black);
 }
 
 .video-background:hover #background-video {
@@ -81,29 +83,9 @@ body {
     color: aliceblue;
 }
 
+/* Scrollbar hidden on all devices */
 ::-webkit-scrollbar {
-    width: 10px;
-}
-
-::-webkit-scrollbar-thumb {
-    background-color: rgba(0, 0, 0, 0.3);
-    border-radius: 10px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-    background-color: rgba(0, 0, 0, 0.5);
-}
-
-::-webkit-scrollbar-track {
-    background-color: transparent;
-}
-
-::-webkit-scrollbar-button {
     display: none;
-}
-
-.photo {
-    filter: drop-shadow(10px 7px 10px black);
 }
 
 .social-media {
@@ -132,7 +114,6 @@ body {
     transform: scale(1.1);
     border-radius: 50%;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
-    text
 }
 
 .social-media a:not(:hover) {
@@ -172,7 +153,7 @@ body {
 }
 
 .social-media a.github:hover {
-    border-image: linear-gradient(45deg, rgba(255, 255, 255, 0.8), transparent(21, 0, 255, 0));
+    border-image: linear-gradient(45deg, rgba(255, 255, 255, 0.8), transparent);
     box-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
 }
 
@@ -184,8 +165,10 @@ body {
 
 @media (max-width: 768px) {
     .container {
-        max-width: 90%;
+        max-width: 100%;
         padding: 20px;
+        box-shadow: none;
+        justify-content: flex-start;
     }
 
     .photo img {
@@ -198,8 +181,26 @@ body {
     }
 
     .social-media {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr); /* Two columns */
+        gap: 20px; /* Space between icons */
+        padding: 10px 0;
+        justify-content: center; /* Center align grid */
+        width: 100%; /* Ensure grid takes full width */
+    }
+
+    .social-media a {
+        display: flex;
         flex-direction: column;
-        gap: 10px;
+        align-items: center;
+        padding: 15px;
+        border-radius: 10px !important;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3) !important;
+        transition: none !important;
+        background: rgba(0, 0, 0, 0.7);
+        color: aliceblue;
+        text-align: center;
+        width: 80%; /* Ensure links take full width of grid cell */
     }
 
     .social-media a img {
@@ -207,41 +208,18 @@ body {
         height: 50px;
     }
 
-    .social-media a {
-        flex-direction: column;
-        align-items: center;
-        padding: 10px 0;
-    }
-
-    .social-media a:hover span {
-        opacity: 1;
-        transform: translateY(0);
-    }
-
-    .social-media a span {
-        margin-top: 10px;
-        font-size: 16px;
-        opacity: 1; 
-        transition: opacity 0.3s ease;
-        position: absolute;
-        position: relative;
-        transform: translateY(-100%);
-    }
-
-    .social-media a {
-        border-radius: 5px !important;
-        transition: none !important;
-        box-shadow: 0 0 15px rgba(0, 0, 0, 0.5) !important;
+    .social-media a.github img {
+        filter: brightness(0) invert(1); /* Ensure GitHub icon is white */
     }
 
     .social-media a:hover {
         transform: none !important;
-        border-radius: 5px !important;
-        box-shadow: 0 0 20px rgba(0, 0, 0, 0.8) !important;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.6) !important;
+        border-radius: 10px !important;
     }
 
     .social-media a:not(:hover) {
         transform: none !important;
-        border-radius: 5px !important;
+        border-radius: 10px !important;
     }
 }
