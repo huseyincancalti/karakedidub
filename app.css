@@ -154,6 +154,22 @@ body {
     box-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
 }
 
+.social-media a.dolap {
+    border-color: rgba(0, 255, 255, 0);
+}
+
+.social-media a.dolap:hover {
+    border-image: linear-gradient(45deg, #00d2b3, transparent);
+    box-shadow: 0 0 20px #00d2b3;
+}
+
+.social-media a.dolap img {
+    width: 75px;
+    height: 75px;
+    margin-bottom: 10px;
+}
+
+
 .social-media a img {
     width: 75px;
     height: 75px;
