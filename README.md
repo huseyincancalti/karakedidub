@@ -1,6 +1,6 @@
 # 🌀Hüseyin Can ÇALTI🌀
 
-This website is my (Hüseyin Can ÇALTI) personal website, featuring my social media links. The site has a simple and elegant design with a background video, profile picture, and social media links. Users can easily access my social media accounts.
+This website is my (Hüseyin Can ÇALTI) personal website and contains links to my social media accounts. Users can easily access my social media profiles.
 
 ## 👤 Developer
 
