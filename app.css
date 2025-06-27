@@ -1,11 +1,16 @@
+/* Body ve genel ayarlar */
 body {
     margin: 0;
     padding: 0;
     font-family: Arial, sans-serif;
-    height: 100vh;
-    overflow: hidden;
+    min-height: 100vh;
+    overflow-x: hidden;
+    overflow-y: auto;
+    background-color: #121212;
+    color: aliceblue;
 }
 
+/* Video background */
 .video-background {
     position: fixed;
     top: 0;
@@ -23,31 +28,35 @@ body {
     position: absolute;
 }
 
+.normal-text {
+  font-style: normal !important;
+}
+
+
+/* Container */
 .container {
     background: transparent;
-    backdrop-filter: blur(0px);
+    backdrop-filter: none;
     padding: 0;
     box-shadow: none;
     text-align: center;
     border-radius: 0;
     width: 100%;
     height: 100%;
-    margin: 0;
+    margin: 0 auto;
     position: relative;
-    overflow: hidden;
+    overflow: visible; /* overflow visible ki hover büyümesi kesilmesin */
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
+/* Profil foto */
 .photo {
     position: relative;
     filter: drop-shadow(10px 7px 10px black);
-}
-
-.video-background:hover #background-video {
-    transform: scale(1.1);
+    margin-top: 40px; /* Logoyu biraz aşağıya çekmek için */
 }
 
 .photo img {
@@ -55,7 +64,9 @@ body {
     width: 350px;
     display: block;
     margin: 0 auto 20px auto;
-    transition: transform 0.5s;
+    transition: transform 0.5s ease;
+    object-fit: cover;
+    border-radius: 15px;
 }
 
 .photo img:hover {
@@ -68,6 +79,7 @@ body {
     margin: 0 auto;
 }
 
+/* Tanıtım yazısı */
 .intro {
     margin-bottom: 20px;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 1);
@@ -80,26 +92,24 @@ body {
     color: aliceblue;
 }
 
-/* Scrollbar hidden on all devices */
-::-webkit-scrollbar {
-    display: none;
-}
-
+/* Sosyal medya ikonları ve linkleri */
 .social-media {
     display: flex;
     justify-content: center;
     gap: 20px;
+    flex-wrap: wrap;
+    margin: 40px 0;
 }
 
 .social-media a {
     color: aliceblue;
     text-decoration: none;
-    padding: 10px;
-    border-radius: 5px;
+    padding: 10px 15px;
+    border-radius: 12px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    transition: transform 0.6s ease, border-radius 0.6s ease;
+    transition: transform 0.6s ease, border-color 0.6s ease, box-shadow 0.6s ease;
     background: rgba(0, 0, 0, 0.7);
     border: 2px solid transparent;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
@@ -109,125 +119,363 @@ body {
 
 .social-media a:hover {
     transform: scale(1.1);
-    border-radius: 50%;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+    box-shadow: 0 0 20px rgba(0,0,0,0.8);
 }
-
-.social-media a:not(:hover) {
-    transform: scale(0.9);
-    border-radius: 5px;
-}
-
-.social-media a.instagram {
-    border-color: rgba(225, 48, 108, 0);
-}
-
-.social-media a.youtube {
-    border-color: rgba(255, 0, 0, 0);
-}
-
-.social-media a.discord {
-    border-color: rgba(114, 137, 218, 0);
-}
-
-.social-media a.github {
-    border-color: rgba(0, 0, 0, 0);
-}
-
-.social-media a.instagram:hover {
-    border-image: linear-gradient(45deg, transparent, #405ce600);
-    box-shadow: 0 0 20px #e1306c;
-}
-
-.social-media a.youtube:hover {
-    border-image: linear-gradient(45deg, #ff0000, transparent(21, 0, 255, 0));
-    box-shadow: 0 0 20px #ff0000;
-}
-
-.social-media a.discord:hover {
-    border-image: linear-gradient(45deg, #7289da, transparent(21, 0, 255, 0));
-    box-shadow: 0 0 20px #7289da;
-}
-
-.social-media a.github:hover {
-    border-image: linear-gradient(45deg, rgba(255, 255, 255, 0.8), transparent);
-    box-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
-}
-
-.social-media a.dolap {
-    border-color: rgba(0, 255, 255, 0);
-}
-
-.social-media a.dolap:hover {
-    border-image: linear-gradient(45deg, #00d2b3, transparent);
-    box-shadow: 0 0 20px #00d2b3;
-}
-
-.social-media a.twitter {
-    border-color: rgba(29, 161, 242, 0); /* Twitter mavi */
-}
-
-.social-media a.twitter:hover {
-    border-image: linear-gradient(45deg, #000000, transparent); /* Siyah geçişli kenarlık */
-    box-shadow: 0 0 20px #000000; /* Siyah gölge efekti */
-}
-
-
-
-.social-media a.dolap img {
-    width: 75px;
-    height: 75px;
-    margin-bottom: 10px;
-}
-
 
 .social-media a img {
     width: 75px;
     height: 75px;
     margin-bottom: 10px;
+    transition: transform 0.6s ease;
+    object-fit: contain;
 }
 
-@media (max-width: 600px) {
-    .social-media {
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        width: 100%;
-        margin: 0 auto;
-        padding: 0;
-        gap: 15px;
+.social-media a:hover img {
+    transform: scale(1.1);
+}
+
+
+/* Sosyal medya buton hover renkleri */
+.social-media a.instagram:hover {
+    border-color: rgba(225, 48, 108, 1);
+    box-shadow: 0 0 20px #e1306c;
+}
+.social-media a.youtube:hover {
+    border-color: rgba(255, 0, 0, 1);
+    box-shadow: 0 0 20px #ff0000;
+}
+.social-media a.discord:hover {
+    border-color: rgba(114,137,218);
+    box-shadow: 0 0 20px #7289da;
+}
+.social-media a.github:hover {
+    border-color: rgba(255, 255, 255, 0.8);
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+}
+.social-media a.twitter:hover {
+    border-color: #000000;
+    box-shadow: 0 0 20px #1da1f2;
+}
+
+/* Menü Butonları (Şeffaf, Cam Efekti, Emoji Eklendi) */
+.menu-buttons {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    margin-top: 20px;
+    padding: 12px 0;
+    width: 80%;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    background: rgba(0, 0, 0, 0.6); /* Sosyal medyayla uyumlu şeffaf arka plan */
+    border-radius: 16px;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: 0 8px 30px rgba(18, 34, 68, 0.6);
+    overflow: visible;
+}
+
+.menu-buttons button {
+    flex: 0 1 45%;
+    background: rgba(225, 48, 108, 0.15);
+    color: #f8e4f1;
+    border: 1.8px solid rgba(225, 48, 108, 0.55);
+    padding: 16px 20px 16px 50px;
+    border-radius: 18px;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 18px;
+    position: relative;
+    transition: all 0.3s ease;
+    overflow: visible;
+    box-shadow: 0 5px 30px rgba(225, 48, 108, 0.25);
+}
+
+.menu-buttons button:hover {
+    background: rgba(225, 48, 108, 0.25);
+    border-color: rgba(225, 48, 108, 0.8);
+    box-shadow: 0 0 25px rgba(225, 48, 108, 0.9), 0 0 30px rgba(18, 34, 68, 0.7);
+    transform: scale(1.1);
+}
+
+
+
+/* Emoji iconları butonun soluna ekle */
+.menu-buttons button#btn-shop::before {
+    content: "🛍️";
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 26px;
+}
+
+.menu-buttons button#btn-videos::before {
+    content: "🎥";
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 26px;
+}
+
+.menu-buttons button:hover {
+    transform: scale(1.1);
+    background: rgba(225, 48, 108, 0.28);
+    border-color: rgba(225, 48, 108, 0.9);
+    box-shadow: 0 0 30px rgba(225, 48, 108, 0.9);
+    color: #fff;
+}
+
+/* Kampanya ile Linkler Arasına Boşluk Koyma*/
+.campaign-container {
+    margin-top: 50px; /* varsayılan 30px idi, arttırdım */
+}
+
+/* Shop links'i sosyal medya linkleri gibi yap ve renk uyumu ver */
+
+.shop-links {
+    margin-top: 30px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.shop-links ul {
+    list-style: none;
+    padding: 0;
+    margin: 30px auto 0 auto;
+    max-width: 1000px;
+    text-align: center;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 25px;
+    flex-wrap: wrap; /* Dar ekranda alta geçmeleri için */
+}
+
+.shop-links li {
+    display: inline-flex;
+}
+
+
+.shop-links a {
+    width: 90px;
+    height: 90px;
+    color: aliceblue;
+    text-decoration: none;
+    padding: 10px 15px;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    border: 2px solid transparent;
+    background: rgba(0, 0, 0, 0.6);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+    transition: transform 0.6s ease, border-color 0.6s ease, box-shadow 0.6s ease;
+    position: relative;
+    overflow: visible;
+    justify-content: center;
+    margin: 0 auto 15px auto;
+}
+
+
+.shop-links a:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 20px rgba(0,0,0,0.8);
+    border-color: #00ffe0; /* Hover'da parlak neon renk, sosyal medyada mavimsi bir renk örneği */
+    background: rgba(0, 0, 0, 0.75);
+}
+
+.shop-icon {
+    width: 32px;
+    height: 32px;
+}
+
+.shop-links a img.shop-icon {
+    width: 50px;
+    height: 50px;
+    object-fit: contain;
+    margin-bottom: 6px;
+}
+
+
+.shop-links a:hover img.shop-icon {
+    transform: scale(1.1);
+}
+
+/* Sahibinden - Sarı ton */
+.shop-links a.sahibinden:hover {
+    border-color: #f1c40f;
+    box-shadow: 0 0 25px #f1c40f, 0 0 35px #d4ac0d;
+}
+
+/* Gardrops - Eflatun (morumsu) */
+.shop-links a.gardrops:hover {
+    border-color: #9b59b6;
+    box-shadow: 0 0 25px #9b59b6, 0 0 35px #7d3c98;
+}
+
+/* Dolap - Yeşilimsi */
+.shop-links a.dolap:hover {
+    border-color: #27ae60;
+    box-shadow: 0 0 25px #27ae60, 0 0 35px #1e8449;
+}
+
+
+
+/* Videolar */
+.video-gallery {
+    display: flex;
+    flex-direction: column; /* Videoları alt alta koymak için */
+    align-items: center; /* Ortalamak için */
+    gap: 30px; /* Videolar arası boşluk */
+    padding: 20px 0 40px 0; /* Üst ve alt boşluk */
+    max-width: 100%;
+}
+
+.video-gallery::-webkit-scrollbar {
+    display: none;
+}
+
+.video-item {
+    width: 100%; /* Container genişliği, dilersen %100 veya max-width ile de ayarlayabilirsin */
+    max-width: 1080px; /* 1920x1080'e uygun maksimum genişlik */
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 12px;
+    padding: 60px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.7);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* Başlık videonun üstünde */
+.video-item h3 {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 700;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+/* Video iframe */
+.video-item iframe {
+    width: 100%; /* Konteyner genişliğini kaplar */
+    aspect-ratio: 16 / 9; /* 1920x1080 için ideal oran */
+    border-radius: 12px;
+    border: none;
+}
+
+/* Açıklama video altında */
+.video-item p {
+    text-align: left; /* Sol hizala */
+    margin: 0;
+}
+
+.video-item div {
+    text-align: left; /* İçerik sol hizalanır */
+}
+
+/* Kampanya Blokları */
+.campaign-container {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin-top: 30px;
+    flex-wrap: wrap;
+}
+
+.campaign-item {
+    position: relative;
+    width: 280px;
+    background: linear-gradient(135deg, #ff416c, #ff4b2b);
+    border-radius: 20px;
+    overflow: hidden;
+    cursor: pointer;
+    box-shadow: 0 0 25px rgba(255, 75, 43, 0.8);
+    color: white;
+    text-align: center;
+    padding: 15px;
+    transition: box-shadow 0.6s ease;
+}
+
+.campaign-item:hover {
+    box-shadow:
+      0 0 30px 5px rgba(255, 75, 43, 0.9),
+      0 0 50px 10px rgba(255, 165, 0, 0.7);
+    animation: shimmer 2.5s infinite;
+}
+
+.campaign-item img {
+    width: 100%;
+    border-radius: 15px;
+    margin-bottom: 10px;
+}
+
+.campaign-item h3 {
+    margin: 0 0 10px 0;
+    font-size: 22px;
+    text-transform: uppercase;
+}
+
+.campaign-item p {
+    font-size: 15px;
+}
+
+/* Şeffaf scrollbar */
+body::-webkit-scrollbar {
+    width: 8px;
+}
+
+body::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+body::-webkit-scrollbar-thumb {
+    background-color: rgba(255, 255, 255, 0.3);
+    border-radius: 10px;
+    border: 2px solid transparent;
+    background-clip: content-box;
+}
+
+/* Parıltı Animasyonu */
+@keyframes shimmer {
+    0% {
+        box-shadow:
+          0 0 30px 5px rgba(255, 75, 43, 0.9),
+          0 0 50px 10px rgba(255, 165, 0, 0.7);
+    }
+    50% {
+        box-shadow:
+          0 0 45px 8px rgba(255, 75, 43, 1),
+          0 0 70px 15px rgba(255, 165, 0, 1);
+    }
+    100% {
+        box-shadow:
+          0 0 30px 5px rgba(255, 75, 43, 0.9),
+          0 0 50px 10px rgba(255, 165, 0, 0.7);
+    }
+}
+
+@media (max-width: 650px) {
+    body {
+        overflow-y: auto;
     }
 
-    .social-media a {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: flex-start;
-        width: 70%; /* Genişliği kısıtladık */
-        max-width: 200px; /* Maksimum genişlik */
-        padding: 10px 15px;
-        gap: 12px;
-        border-radius: 10px;
-        background-color: rgba(0, 0, 0, 0.6);
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
-        transform: none !important;
-        border: none !important;
+    .container {
+        padding: 20px 10px;
+        height: auto;
     }
 
-    /* Hover efektleri tamamen kaldırıldı */
-    .social-media a:hover,
-    .social-media a:active,
-    .social-media a:focus {
-        transform: none !important;
-        border-radius: 10px !important;
-        box-shadow: none !important;
-        background-color: rgba(0, 0, 0, 0.6) !important;
-    }
-
-    .social-media a img {
-        width: 50px !important;
-        height: 50px !important;
-        margin: 0;
+    .video-background {
+        height: 100%;
     }
 
     .photo img {
@@ -241,16 +489,115 @@ body {
         text-align: center;
     }
 
-    .container {
-        padding: 20px 10px;
-        height: auto;
+    .social-media {
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+        margin: 30px 0;
     }
 
-    body {
+    .social-media a {
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-start;
+        width: 85%;
+        max-width: 250px;
+        gap: 12px;
+        padding: 10px 15px;
+        background-color: rgba(0, 0, 0, 0.6);
+        border-radius: 10px;
+        box-shadow: none;
+        transform: none;
+        transition: none;
+    }
+
+    .social-media a img {
+        width: 50px !important;
+        height: 50px !important;
+        margin: 0;
+        transform: none;
+    }
+
+    .menu-buttons {
+        flex-direction: column;
+        width: 90%;
+        padding: 0;
+        gap: 15px;
+        background-color: transparent;
+        margin-top: 10px;
+        border-radius: 0;
+    }
+
+    .menu-buttons button {
+        flex: none;
+        width: 100%;
+        font-size: 16px;
+        padding: 12px 15px;
+        border-radius: 12px;
+        background: rgba(225, 48, 108, 0.15);
+        border: 1.8px solid rgba(225, 48, 108, 0.55);
+        box-shadow: none;
+        transform: none;
+        transition: none;
+        cursor: pointer;
+    }
+
+    .campaign-container {
+        flex-direction: column;
+        align-items: center;
+        gap: 25px;
+    }
+
+    .video-gallery {
+        flex-direction: column;
+        align-items: center;
+        overflow-x: hidden;
         overflow-y: auto;
     }
 
-    .video-background {
-        height: 100%;
+    .video-item {
+        width: 95%;
+        padding: 10px;
+    }
+
+    .shop-links {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .shop-links a {
+        width: 90%;
+        max-width: 300px;
+        height: auto;
+        padding: 10px 0;
+        flex-direction: row;
+        justify-content: flex-start;
+        gap: 10px;
+        margin: 0 auto;
+    }
+
+    .shop-icon {
+        margin-bottom: 0;
+        width: 32px;
+        height: 32px;
+    }
+    
+    .campaign-item {
+        box-shadow: none !important;
+        transform: none !important;
+        border-color: transparent !important;
+        background: rgba(0, 0, 0, 0.5) !important;
+        transition: none !important;
+    }
+
+    .shop-links a img.shop-icon,
+    .campaign-item img,
+    .menu-buttons button:hover,
+    .social-media a:hover,
+    .shop-links a:hover,
+    .campaign-item:hover {
+        transform: none !important;
+        box-shadow: none !important;
+        border-color: transparent !important;
     }
 }
