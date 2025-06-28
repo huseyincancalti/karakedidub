@@ -13,6 +13,8 @@ window.addEventListener("focus", () => {
     document.title = originalTitle;
 });
 
+
+
 // Logo tıklanınca sayfa yenilensin
 document.getElementById("refresh-link").addEventListener("click", (event) => {
     event.preventDefault();
@@ -36,27 +38,27 @@ function getShopContent() {
     return `
     <div class="shop-links">
         <a href="https://www.sahibinden.com/arama?userId=aaanY296LAp2ywfDoiKRKhA" target="_blank" class="sahibinden" rel="noopener noreferrer">
-            <img src="Resimler/sahibinden-icon.png" class="shop-icon" alt="Sahibinden" />
+            <img src="Resimler/sahibinden-icon.webp" class="shop-icon" alt="Sahibinden" />
             Sahibinden
         </a>
         <a href="https://www.gardrops.com/karakedidub" target="_blank" class="gardrops" rel="noopener noreferrer">
-            <img src="Resimler/gardrops-icon.png" class="shop-icon" alt="Gardrops" />
+            <img src="Resimler/gardrops-icon.webp" class="shop-icon" alt="Gardrops" />
             Gardrops
         </a>
         <a href="https://www.dolap.com/profil/karakedidub" target="_blank" class="dolap" rel="noopener noreferrer">
-            <img src="Resimler/dolap-icon.png" class="shop-icon" alt="Dolap" />
+            <img src="Resimler/dolap-icon.webp" class="shop-icon" alt="Dolap" />
             Dolap
         </a>
     </div>
 
     <div class="campaign-container">
         <div class="campaign-item" onclick="window.open('https://www.sahibinden.com/ilan/ikinci-el-ve-sifir-alisveris-muzik-studyo-ekipmanlari-behringer-umc22-temiz-ve-sifir-gibi-ses-karti-1253373572/detay', '_blank')">
-            <img src="Resimler/sahibinden-campaign.png" alt="Sahibinden Kampanya" />
+            <img src="Resimler/sahibinden-campaign.webp" alt="Sahibinden Kampanya" />
             <h3>BEHRINGER UMC22 SES KARTI</h3>
             <p>Sahibinden Linki!</p>
         </div>
         <div class="campaign-item" onclick="window.open('https://www.gardrops.com/cocuk/cocuk-oyuncak/gojo-figuru-gomen-amanai-56ed06ceafb556cc', '_blank')">
-            <img src="Resimler/gardrops-campaign.png" alt="Gardrops Kampanya" />
+            <img src="Resimler/gardrops-campaign.webp" alt="Gardrops Kampanya" />
             <h3>GOJO FİGÜRÜ</h3>
             <p>Gardrops Linki!</p>
         </div>
@@ -146,6 +148,9 @@ function getVideosContent() {
 
 // İçerik gösterme ve sosyal medya gizleme/gösterme fonksiyonu
 function showSection(section) {
+
+    
+
     if (section === currentSection) {
         // Aynı butona tekrar basılırsa içeriği ve gizlemeyi kaldır
         content.innerHTML = '';
@@ -180,7 +185,19 @@ function showSection(section) {
     } else {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
+    
 }
+
+// Mobilde video arka planının yükseklik hatasını düzeltmek için --vh hesapla
+function updateVH() {
+    let vh = window.innerHeight * 0.01;
+    document.documentElement.style.setProperty('--vh', `${vh}px`);
+}
+
+// Sayfa yüklendiğinde ve boyut değiştiğinde tetikle
+updateVH();
+window.addEventListener('resize', updateVH);
+
 
 // Sayfa yüklendiğinde içerik boş
 content.innerHTML = '';
