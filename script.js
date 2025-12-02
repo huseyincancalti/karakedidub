@@ -21,14 +21,51 @@ openBtn.onclick = function() {
     }
 }
 
-closeBtn.onclick = function() {
-    modal.classList.remove("open");
-    const video = playerWrapper.querySelector('video');
-    if(video) video.pause();
+// --- MODAL İŞLEMLERİ (GÜNCELLENDİ) ---
+
+// Açma İşlemi
+openBtn.onclick = function() {
+    modal.classList.add("open");
+    
+    // Her açılışta player'ı sıfırdan kur (Böylece video hep baştan başlar)
+    if (!isPlayerSetup) {
+        setupPlayer(VIDEO_URL);
+        isPlayerSetup = true;
+    } else {
+        const video = playerWrapper.querySelector('video');
+        if(video) video.play();
+    }
 }
 
+// Kapatma Fonksiyonu (Videoyu Hafızadan Siler)
+function closePlayer() {
+    modal.classList.remove("open");
+    
+    const video = playerWrapper.querySelector('video');
+    
+    if (video) {
+        video.pause();           // 1. Durdur
+        video.removeAttribute('src'); // 2. Kaynağı sil
+        video.load();            // 3. Boş kaynağı yükle (Bildirimi siler)
+    }
+
+    // HLS kullanıyorsak onu da yok et
+    if (hls) {
+        hls.destroy();
+        hls = null;
+    }
+
+    // Player içeriğini temizle ve durumu sıfırla
+    playerWrapper.innerHTML = ""; 
+    isPlayerSetup = false; 
+}
+
+// Çarpıya basınca
+closeBtn.onclick = closePlayer;
+
+// Boşluğa basınca
 window.onclick = function(event) {
-    if (event.target == modal) closeBtn.click();
+    if (event.target == modal) closePlayer();
 }
 
 // --- PLAYER KURULUMU ---
