@@ -259,11 +259,6 @@ body {
     padding-left: 20px;
 }
 
-@media(hover: hover) {
-    .box-card:hover img { transform: scale(1.15) rotate(5deg); }
-    .list-card:hover .icon-wrap { background: rgba(255,255,255,0.15); }
-}
-
 /* =========================================
    5. MODAL (POP-UP) SİSTEMİ
    ========================================= */
@@ -512,99 +507,144 @@ body {
 
 @keyframes spin { to { transform: translate(-50%, -50%) rotate(360deg); } }
 /* =========================================
-   7. DEMO BUTONU ÖZEL STİLLERİ
-========================================= */
+   7. DEMO VE WEB BUTONLARI (RENKLİ CAM / HİBRİT)
+   ========================================= */
 
 .demo-wrapper {
     width: 100%;
     margin-top: 15px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
 }
 
+/* BUTON ORTAK STİLİ */
 .demo-btn {
     width: 100%;
     padding: 15px;
-    border-radius: 12px;
-    /* Varsayılan Morumsu Arka Plan */
-    background: rgba(108, 92, 231, 0.15); 
-    border: 1px solid rgba(108, 92, 231, 0.4);
+    border-radius: 16px;
     color: white;
     display: flex;
     align-items: center;
     justify-content: space-between;
     cursor: pointer;
-    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); /* Yumuşak geçiş */
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
     position: relative;
     overflow: hidden;
+    text-decoration: none;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    
+    /* ÖNEMLİ: Cam efekti kalsın ama renkli olacak */
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-width: 1px;
+    border-style: solid;
 }
 
-/* --- HOVER EFEKTİ (OLAY BURADA) --- */
-.demo-btn:hover {
-    /* Arka plan biraz daha parlasın */
-    background: rgba(108, 92, 231, 0.3);
-    /* Kenarlık tam mor olsun */
+/* 1. DEMO BUTONU (MOR TEMALI CAM) */
+#openModalBtn {
+    /* Hafif morumsu siyah zemin */
+    background: linear-gradient(145deg, rgba(108, 92, 231, 0.15), rgba(20, 20, 20, 0.8));
+    /* Belirgin Mor Kenarlık */
+    border-color: rgba(108, 92, 231, 0.5);
+}
+
+#openModalBtn:hover {
+    /* Hoverda daha parlasın */
+    background: linear-gradient(145deg, rgba(108, 92, 231, 0.25), rgba(40, 40, 40, 0.9));
     border-color: #6c5ce7;
-    /* Kutu yukarı kalksın */
+    box-shadow: 0 0 25px rgba(108, 92, 231, 0.4); /* Neon parlama */
     transform: translateY(-5px);
-    /* EFSANE NEON PARLAMA */
-    box-shadow: 0 0 25px rgba(108, 92, 231, 0.6);
 }
 
-/* İçerik Düzeni */
+/* 2. WEB BUTONU (TURKUAZ TEMALI CAM) */
+.website-btn {
+    /* Hafif turkuazımsı siyah zemin */
+    background: linear-gradient(145deg, rgba(0, 210, 211, 0.15), rgba(20, 20, 20, 0.8));
+    /* Belirgin Turkuaz Kenarlık */
+    border-color: rgba(0, 210, 211, 0.5);
+}
+
+.website-btn:hover {
+    background: linear-gradient(145deg, rgba(0, 210, 211, 0.25), rgba(40, 40, 40, 0.9));
+    border-color: #00d2d3;
+    box-shadow: 0 0 25px rgba(0, 210, 211, 0.4); /* Neon parlama */
+    transform: translateY(-5px);
+}
+
+/* İÇERİK DÜZENİ */
 .demo-content-left {
     display: flex;
     align-items: center;
-    gap: 15px;
+    gap: 12px;
 }
 
-/* Play İkon Kutusu */
+/* İKON KUTULARI */
 .play-icon-box {
-    background: #6c5ce7;
-    width: 40px;
-    height: 40px;
-    border-radius: 8px;
+    width: 42px; height: 42px;
+    border-radius: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.2rem;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    font-size: 1.1rem;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.4);
     transition: transform 0.3s;
+    color: white;
 }
 
-/* Hover'da ikon biraz büyüsün */
+/* Demo İkonu Rengi (Daha koyu mor) */
+#openModalBtn .play-icon-box {
+    background: #6c5ce7; 
+}
+
+/* Web İkonu Rengi (Daha koyu turkuaz) */
+.website-btn .play-icon-box {
+    background: #00d2d3;
+}
+
 .demo-btn:hover .play-icon-box {
-    transform: scale(1.1) rotate(5deg);
+    transform: scale(1.15) rotate(5deg);
 }
 
+/* YAZI GRUBU */
 .text-group {
     text-align: left;
 }
 
 .demo-title {
-    font-weight: 600;
-    font-size: 1rem;
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: #fff;
+    margin-bottom: 2px;
 }
 
 .demo-subtitle {
-    font-size: 0.75rem;
-    opacity: 0.7;
+    font-size: 0.7rem;
+    color: rgba(255, 255, 255, 0.7);
+    font-weight: 400;
 }
 
-/* Ok İşareti */
+/* OK İŞARETİ */
 .arrow-icon {
-    font-size: 1.2rem;
-    transition: transform 0.3s ease;
+    font-size: 1.1rem;
+    opacity: 0.5;
+    transition: all 0.3s ease;
 }
 
-/* Hover'da ok sağa kaysın */
-.demo-btn:hover .arrow-icon {
+/* Hoverda ok renklensin */
+#openModalBtn:hover .arrow-icon {
     transform: translateX(5px);
     color: #6c5ce7;
+    opacity: 1;
 }
 
-.footer {
-    margin-top: 50px;
-    font-size: 0.75rem;
-    color: rgba(255,255,255,0.4);
-    text-shadow: 0 2px 4px rgba(0,0,0,0.8);
-    text-align: center;
+.website-btn:hover .arrow-icon {
+    transform: translateX(5px);
+    color: #00d2d3;
+    opacity: 1;
+}
+
+@media(hover: hover) {
+    .box-card:hover img { transform: scale(1.15) rotate(5deg); }
+    .list-card:hover .icon-wrap { background: rgba(255,255,255,0.15); }
 }
