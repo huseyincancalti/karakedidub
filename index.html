@@ -1,66 +1,110 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-    <title>🌀Hüseyin Can ÇALTI🌀</title>
-    <link rel="stylesheet" href="style.css" />
-    <link rel="icon" href="Resimler/karakedilogo.webp" type="image/webp" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KaraKedi | Hüseyin Can ÇALTI</title>
     
+    <link rel="icon" type="image/webp" href="assets/logo.webp">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600;700&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
-    <div class="video-background">
-        <video autoplay muted loop id="background-video">
-            <source src="Videolar/zerotwo.webm" type="video/webm" />
-            Tarayıcınız video etiketini desteklemiyor.
+
+    <div class="video-bg">
+        <video autoplay muted loop playsinline>
+            <source src="assets/video.webm" type="video/webm">
         </video>
+        <div class="overlay"></div>
     </div>
 
     <div class="container">
-        <div class="photo">
-            <a href="#" id="refresh-link">
-                <img src="Resimler/karakedilogo.webp" alt="Profil Fotoğrafı" />
+        
+        <header class="profile-header">
+            <div class="logo-container">
+                <img src="assets/logo.webp" alt="KaraKedi Logo" class="profile-img">
+            </div>
+            <h1 class="username">Hüseyin Can ÇALTI</h1>
+            <p class="bio-text">Seslendirme Sanatçısı & İçerik Üreticisi</p>
+        </header>
+        
+        <div class="section-label">Sosyal Medya</div>
+        
+        <div class="social-grid">
+            <a href="https://www.instagram.com/karakedidub/" target="_blank" class="box-card instagram">
+                <img src="assets/instagram-icon.webp" alt="Instagram">
+                <span>Instagram Dublaj</span>
+            </a>
+            <a href="https://www.instagram.com/karakedigame/" target="_blank" class="box-card instagram">
+                <img src="assets/instagram-icon.webp" alt="Instagram">
+                <span>Instagram Oyun</span>
+            </a>
+            <a href="https://www.youtube.com/@karakedidub" target="_blank" class="box-card youtube">
+                <img src="assets/youtube-icon.webp" alt="YouTube">
+                <span>YouTube Dublaj</span>
+            </a>
+            <a href="https://www.youtube.com/@karakedigame" target="_blank" class="box-card youtube">
+                <img src="assets/youtube-icon.webp" alt="YouTube">
+                <span>YouTube Oyun</span>
             </a>
         </div>
 
-        <!-- Sosyal Medya Linkleri -->
-        <div class="social-media">
-            <a href="https://www.instagram.com/karakedidub/" target="_blank" class="instagram">
-                <img src="Resimler/instagram-icon.webp" alt="Instagram" />
-                <span class="gizli-yazi">Instagram</span>
+        <div class="demo-wrapper">
+            <button id="openModalBtn" class="list-card demo-btn">
+                <div class="demo-content-left">
+                    <div class="play-icon-box">▶</div>
+                    <div class="text-group">
+                        <div class="demo-title">Demo Kaydım</div>
+                        <div class="demo-subtitle">Çalışmalarımı İzleee</div>
+                    </div>
+                </div>
+                <div class="arrow-icon">➔</div>
+            </button>
+        </div>
+
+        <div class="section-label">Topluluk & İletişim</div>
+        <div class="list-group">
+            <a href="https://discord.gg/Vnvd7Bc6uX" target="_blank" class="list-card discord">
+                <div class="icon-wrap"><img src="assets/discord-icon.webp" alt=""></div>
+                <div class="text-wrap"><span class="title">Discord</span><span class="subtitle">Sunucumuza Hojgel</span></div>
             </a>
-            <a href="https://www.youtube.com/@karakedidub" target="_blank" class="youtube">
-                <img src="Resimler/youtube-icon.webp" alt="YouTube" />
-                <span class="gizli-yazi">YouTube</span>
+            <a href="https://github.com/huseyincancalti" target="_blank" class="list-card github">
+                <div class="icon-wrap"><img src="assets/github-icon.webp" alt=""></div>
+                <div class="text-wrap"><span class="title">GitHub</span><span class="subtitle">Yazılım Projelerim</span></div>
             </a>
-            <a href="https://discord.gg/karakedi" target="_blank" class="discord">
-                <img src="Resimler/discord-icon.webp" alt="Discord" />
-                <span class="gizli-yazi">Discord</span>
-            </a>
-            <a href="https://github.com/huseyincancalti" target="_blank" class="github">
-                <img src="Resimler/github-icon.webp" alt="GitHub" />
-                <span class="gizli-yazi">GitHub</span>
-            </a>
-            <a href="https://x.com/karakedidub" target="_blank" class="twitter">
-                <img src="Resimler/twitter-icon.webp" alt="Twitter" />
-                <span class="gizli-yazi">Twitter</span>
+            <a href="https://x.com/karakedidub" target="_blank" class="list-card twitter">
+                <div class="icon-wrap"><img src="assets/twitter-icon.webp" alt=""></div>
+                <div class="text-wrap"><span class="title">X</span><span class="subtitle">Belki bir şeyler paylaşırım</span></div>
             </a>
         </div>
 
-        <!-- Menü Butonları -->
-        <div class="menu-buttons">
-            <button id="btn-shop" onclick="showSection('shop')">Alışveriş</button>
-            <button id="btn-videos" onclick="showSection('videos')">Videolar</button>
+        <div class="section-label">Dolap & Gardrops</div>
+        <div class="list-group">
+            <a href="https://dolap.com/profil/karakedidub" target="_blank" class="list-card shop">
+                <div class="icon-wrap"><img src="assets/dolap-icon.webp" alt=""></div>
+                <div class="text-wrap"><span class="title">Dolap</span><span class="subtitle">Satış Platformum</span></div>
+            </a>
+            <a href="https://www.gardrops.com/karakedidub-u-14154415" target="_blank" class="list-card shop">
+                <div class="icon-wrap"><img src="assets/gardrops-icon.webp" alt=""></div>
+                <div class="text-wrap"><span class="title">Gardrops</span><span class="subtitle">Satış Platformum 2.0</span></div>
+            </a>
         </div>
 
-        <!-- Dinamik İçerik Alanı -->
-        <div class="content-area" id="content-area">
-            <!-- JS ile dinamik içerik buraya gelecek -->
+        <footer class="footer">
+            <p>© 2025 KaraKedi Production</p>
+        </footer>
+    </div> 
+
+    <div id="videoModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <div id="customPlayerWrapper" class="custom-player-wrapper"></div>
         </div>
     </div>
 
-    <script src="script.js" defer></script>
-    
-
+    <script src="script.js"></script>
 </body>
 </html>

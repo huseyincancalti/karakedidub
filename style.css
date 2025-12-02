@@ -1,627 +1,610 @@
+/* =========================================
+   1. GENEL AYARLAR VE DEĞİŞKENLER
+   ========================================= */
 :root {
-    --vh: 1vh;
+    /* Ana Renkler */
+    --bg-dark: #0f0f0f;
+    --text-white: #ffffff;
+    --text-gray: #d1d1d1;
+    
+    /* Cam Efekti (Glassmorphism) */
+    --glass-bg: rgba(30, 30, 30, 0.60);
+    --border-color: rgba(255, 255, 255, 0.15);
+    --hover-bg: rgba(255, 255, 255, 0.1);
+    
+    /* Player & Marka Rengi */
+    --accent-color: #6c5ce7; /* Mor */
+    --accent-color-rgb: 108, 92, 231;
+    
+    /* Font */
+    --font-family: 'Poppins', sans-serif;
 }
 
-
-/* Body ve genel ayarlar */
-body {
+* {
     margin: 0;
     padding: 0;
-    font-family: Arial, sans-serif;
+    box-sizing: border-box;
+    font-family: var(--font-family);
+}
+
+body {
     min-height: 100vh;
+    background-color: var(--bg-dark);
+    color: var(--text-white);
     overflow-x: hidden;
-    overflow-y: auto;
-    background-color: #121212;
-    color: aliceblue;
 }
 
-/* Video background */
-.video-background {
+/* =========================================
+   2. ARKA PLAN VİDEOSU
+   ========================================= */
+.video-bg {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: calc(var(--vh, 1vh) * 100); /* Mobil sabitlik için */
+    top: 0; left: 0;
+    width: 100%; height: 100%;
     z-index: -1;
-    overflow: hidden;
-    pointer-events: none; /* tıklamaları engelle */
-    transform: translateZ(0); /* sabitliği garantiye al */
 }
 
-#background-video {
+.video-bg video {
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    top: 50%; left: 50%;
+    min-width: 100%; min-height: 100%;
+    transform: translate(-50%, -50%);
     object-fit: cover;
 }
 
-
-
-.normal-text {
-  font-style: normal !important;
+.overlay {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Karartma oranı */
 }
 
-
-/* Container */
+/* =========================================
+   3. ANA İÇERİK (PROFİL & LİNKLER)
+   ========================================= */
 .container {
-    background: transparent;
-    backdrop-filter: none;
-    padding: 0;
-    box-shadow: none;
-    text-align: center;
-    border-radius: 0;
     width: 100%;
-    height: 100%;
+    max-width: 500px;
     margin: 0 auto;
-    position: relative;
-    overflow: visible; /* overflow visible ki hover büyümesi kesilmesin */
+    padding: 50px 20px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
 }
 
-/* Profil foto */
-.photo {
-    position: relative;
-    filter: drop-shadow(10px 7px 10px black);
-    margin-top: 40px; /* Logoyu biraz aşağıya çekmek için */
+/* --- Profil Başlığı --- */
+.profile-header {
+    text-align: center;
+    margin-bottom: 25px;
 }
 
-.photo img {
-    height: 350px;
-    width: 350px;
-    display: block;
-    margin: 0 auto 20px auto;
-    transition: transform 0.5s ease;
+.logo-container {
+    width: 180px;
+    height: 180px;
+    margin: 0 auto 15px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 50%;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+/* Logo Parlama Efekti */
+.logo-container::after {
+    content: '';
+    position: absolute;
+    top: 0; left: -100%;
+    width: 50%; height: 100%;
+    background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.6), transparent);
+    transform: skewX(-25deg);
+    pointer-events: none;
+}
+.logo-container:hover::after {
+    left: 150%;
+    transition: all 0.8s ease;
+}
+
+.profile-img {
+    width: 100%; height: 100%;
     object-fit: cover;
-    border-radius: 15px;
+    border: 3px solid rgba(255,255,255,0.2);
+    transition: transform 0.3s ease;
+}
+.logo-container:hover .profile-img { transform: scale(1.05); }
+
+.username {
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    margin-bottom: 5px;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.5);
 }
 
-.photo img:hover {
-    transform: scale(1.1);
+.bio-text {
+    color: var(--text-gray);
+    font-size: 0.9rem;
+    font-weight: 300;
+    text-shadow: 0 2px 5px rgba(0,0,0,0.5);
 }
 
-.photo a {
-    display: block;
-    width: fit-content;
-    margin: 0 auto;
-}
-
-/* Tanıtım yazısı */
-.intro {
-    margin-bottom: 20px;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 1);
-}
-
-.intro p {
-    font-size: 30px;
-    line-height: 1.5;
-    margin-bottom: 20px;
-    color: aliceblue;
-}
-
-/* Sosyal medya ikonları ve linkleri */
-.social-media {
+/* --- Kategori Başlıkları --- */
+.section-label {
+    width: 100%;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: rgba(255,255,255,0.7);
+    margin: 25px 0 10px;
+    padding-left: 5px;
+    font-weight: 600;
     display: flex;
-    justify-content: center;
-    gap: 20px;
-    flex-wrap: wrap;
-    margin: 40px 0;
+    align-items: center;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+}
+.section-label::after {
+    content: "";
+    flex: 1; height: 1px;
+    background: rgba(255,255,255,0.2);
+    margin-left: 15px;
 }
 
-.social-media a {
-    color: aliceblue;
-    text-decoration: none;
-    padding: 10px 15px;
-    border-radius: 12px;
+/* =========================================
+   4. KARTLAR VE BUTONLAR
+   ========================================= */
+/* Grid Yapısı (Sosyal Medya) */
+.social-grid {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+}
+
+/* Liste Yapısı (Diğer Linkler) */
+.list-group {
+    width: 100%;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    transition: transform 0.6s ease, border-color 0.6s ease, box-shadow 0.6s ease;
-    background: rgba(0, 0, 0, 0.7);
-    border: 2px solid transparent;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+    gap: 12px;
+}
+
+/* Kart Genel Stili */
+.box-card, .list-card {
+    background: var(--glass-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--border-color);
+    text-decoration: none;
+    color: var(--text-white);
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
     position: relative;
     overflow: hidden;
 }
 
-.social-media a:hover {
-    transform: scale(1.1);
-    box-shadow: 0 0 20px rgba(0,0,0,0.8);
-}
-
-.social-media a img {
-    width: 75px;
-    height: 75px;
-    margin-bottom: 10px;
-    transition: transform 0.6s ease;
-    object-fit: contain;
-}
-
-.social-media a:hover img {
-    transform: scale(1.1);
-}
-
-
-/* Sosyal medya buton hover renkleri */
-.social-media a.instagram:hover {
-    border-color: rgba(225, 48, 108, 1);
-    box-shadow: 0 0 20px #e1306c;
-}
-.social-media a.youtube:hover {
-    border-color: rgba(255, 0, 0, 1);
-    box-shadow: 0 0 20px #ff0000;
-}
-.social-media a.discord:hover {
-    border-color: rgba(114,137,218);
-    box-shadow: 0 0 20px #7289da;
-}
-.social-media a.github:hover {
-    border-color: rgba(255, 255, 255, 0.8);
-    box-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
-}
-.social-media a.twitter:hover {
-    border-color: #000000;
-    box-shadow: 0 0 20px #1da1f2;
-}
-
-/* Menü Butonları (Şeffaf, Cam Efekti, Emoji Eklendi) */
-.menu-buttons {
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    margin-top: 20px;
-    padding: 12px 0;
-    width: 80%;
-    max-width: 600px;
-    margin-left: auto;
-    margin-right: auto;
-    background: rgba(0, 0, 0, 0.6); /* Sosyal medyayla uyumlu şeffaf arka plan */
+/* Kare Kartlar */
+.box-card {
     border-radius: 16px;
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    box-shadow: 0 8px 30px rgba(18, 34, 68, 0.6);
-    overflow: visible;
-}
-
-.menu-buttons button {
-    flex: 0 1 45%;
-    background: rgba(225, 48, 108, 0.15);
-    color: #f8e4f1;
-    border: 1.8px solid rgba(225, 48, 108, 0.55);
-    padding: 16px 20px 16px 50px;
-    border-radius: 18px;
-    cursor: pointer;
-    font-weight: 700;
-    font-size: 18px;
-    position: relative;
-    transition: all 0.3s ease;
-    overflow: visible;
-    box-shadow: 0 5px 30px rgba(225, 48, 108, 0.25);
-}
-
-.menu-buttons button:hover {
-    background: rgba(225, 48, 108, 0.25);
-    border-color: rgba(225, 48, 108, 0.8);
-    box-shadow: 0 0 25px rgba(225, 48, 108, 0.9), 0 0 30px rgba(18, 34, 68, 0.7);
-    transform: scale(1.1);
-}
-
-
-
-/* Emoji iconları butonun soluna ekle */
-.menu-buttons button#btn-shop::before {
-    content: "🛍️";
-    position: absolute;
-    left: 20px;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 26px;
-}
-
-.menu-buttons button#btn-videos::before {
-    content: "🎥";
-    position: absolute;
-    left: 20px;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 26px;
-}
-
-.menu-buttons button:hover {
-    transform: scale(1.1);
-    background: rgba(225, 48, 108, 0.28);
-    border-color: rgba(225, 48, 108, 0.9);
-    box-shadow: 0 0 30px rgba(225, 48, 108, 0.9);
-    color: #fff;
-}
-
-/* Kampanya ile Linkler Arasına Boşluk Koyma*/
-.campaign-container {
-    margin-top: 50px; /* varsayılan 30px idi, arttırdım */
-}
-
-/* Shop links'i sosyal medya linkleri gibi yap ve renk uyumu ver */
-
-.shop-links {
-    margin-top: 30px;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 15px;
-    justify-content: center;
-    margin-bottom: 20px;
-}
-
-.shop-links ul {
-    list-style: none;
-    padding: 0;
-    margin: 30px auto 0 auto;
-    max-width: 1000px;
-    text-align: center;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 25px;
-    flex-wrap: wrap; /* Dar ekranda alta geçmeleri için */
-}
-
-.shop-links li {
-    display: inline-flex;
-}
-
-
-.shop-links a {
-    width: 90px;
-    height: 90px;
-    color: aliceblue;
-    text-decoration: none;
-    padding: 10px 15px;
-    border-radius: 12px;
+    padding: 20px 5px;
     display: flex;
     flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.box-card img {
+    width: 40px; height: 40px;
+    margin-bottom: 10px;
+    object-fit: contain;
+    transition: transform 0.3s;
+}
+.box-card span {
+    font-size: 0.9rem;
+    font-weight: 500;
+    opacity: 0.9;
+}
+
+/* Uzun Kartlar */
+.list-card {
+    border-radius: 12px;
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+}
+.icon-wrap {
+    width: 42px; height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255,255,255,0.05);
+    border-radius: 10px;
+    margin-right: 15px;
+    transition: background 0.3s;
+}
+.icon-wrap img { width: 24px; height: 24px; object-fit: contain; }
+.text-wrap { display: flex; flex-direction: column; }
+.title { font-weight: 600; font-size: 1rem; }
+.subtitle { font-size: 0.75rem; color: var(--text-gray); }
+
+/* --- MARKA RENKLERİ VE HOVER --- */
+.instagram:hover {
+    border-color: rgba(225, 48, 108, 0.5);
+    background: linear-gradient(135deg, rgba(225, 48, 108, 0.2), rgba(225, 48, 108, 0.05));
+    transform: translateY(-5px);
+}
+.youtube:hover {
+    border-color: rgba(255, 0, 0, 0.5);
+    background: linear-gradient(135deg, rgba(255, 0, 0, 0.2), rgba(255, 0, 0, 0.05));
+    transform: translateY(-5px);
+}
+.discord:hover {
+    border-color: rgba(88, 101, 242, 0.5);
+    background: linear-gradient(90deg, rgba(88, 101, 242, 0.2), rgba(88, 101, 242, 0.05));
+    padding-left: 20px;
+}
+.github:hover {
+    border-color: rgba(255, 255, 255, 0.5);
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.05));
+    padding-left: 20px;
+}
+.twitter:hover {
+    border-color: rgba(29, 161, 242, 0.5);
+    background: linear-gradient(90deg, rgba(29, 161, 242, 0.2), rgba(29, 161, 242, 0.05));
+    padding-left: 20px;
+}
+.list-card[href*="dolap"]:hover {
+    border-color: rgba(0, 210, 190, 0.5);
+    background: linear-gradient(90deg, rgba(0, 210, 190, 0.2), rgba(0, 210, 190, 0.05));
+    padding-left: 20px;
+}
+.list-card[href*="gardrops"]:hover {
+    border-color: rgba(255, 72, 114, 0.5);
+    background: linear-gradient(90deg, rgba(255, 72, 114, 0.2), rgba(255, 72, 114, 0.05));
+    padding-left: 20px;
+}
+
+@media(hover: hover) {
+    .box-card:hover img { transform: scale(1.15) rotate(5deg); }
+    .list-card:hover .icon-wrap { background: rgba(255,255,255,0.15); }
+}
+
+/* =========================================
+   5. MODAL (POP-UP) SİSTEMİ
+   ========================================= */
+.modal {
+    display: none; /* Varsayılan gizli */
+    position: fixed;
+    z-index: 9999;
+    left: 0; top: 0;
+    width: 100%; height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    backdrop-filter: blur(5px);
+    justify-content: center; align-items: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.modal.open {
+    display: flex;
+    opacity: 1;
+}
+
+.modal-content {
+    position: relative;
+    width: 95%; max-width: 900px;
+    background: transparent;
+    border-radius: 12px;
+}
+
+.close-btn {
+    position: absolute;
+    top: -45px; right: 0;
+    color: white;
+    font-size: 40px;
+    line-height: 40px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+    z-index: 10001;
+}
+.close-btn:hover {
+    color: var(--accent-color);
+    transform: scale(1.1);
+}
+
+/* =========================================
+   6. CUSTOM VIDEO PLAYER (ÖZEL OYNATICI)
+   ========================================= */
+
+/* Kapsayıcı */
+.custom-player-wrapper {
+    width: 100%;
+    /* Mobilde ekran taşmasın diye sınırlandırdık */
+    max-height: 80vh;
+    aspect-ratio: 16 / 9;
+    background: #000;
+    border-radius: 12px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 0 40px rgba(108, 92, 231, 0.2);
+}
+
+.player-container {
+    width: 100%; height: 100%;
+    position: relative;
+    font-family: 'Poppins', sans-serif;
+    overflow: hidden;
+}
+
+.player-container video {
+    width: 100%; height: 100%;
+    object-fit: contain;
+    background: #000;
+}
+
+/* --- Kontrol Çubuğu --- */
+.controls-container {
+    position: absolute;
+    bottom: 0; left: 0;
+    width: 100%;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent);
+    padding: 40px 10px 10px;
+    z-index: 100;
+    opacity: 0;
+    transition: opacity 0.3s;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* Mouse gelince kontroller görünsün */
+.player-container:hover .controls-container,
+.player-container.controls-visible .controls-container {
+    opacity: 1;
+}
+
+.controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.controls-left, .controls-right {
+    display: flex;
     align-items: center;
     gap: 10px;
-    border: 2px solid transparent;
-    background: rgba(0, 0, 0, 0.6);
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
-    transition: transform 0.6s ease, border-color 0.6s ease, box-shadow 0.6s ease;
-    position: relative;
-    overflow: visible;
-    justify-content: center;
-    margin: 0 auto 15px auto;
 }
 
-
-.shop-links a:hover {
-    transform: scale(1.1);
-    box-shadow: 0 0 20px rgba(0,0,0,0.8);
-    border-color: #00ffe0; /* Hover'da parlak neon renk, sosyal medyada mavimsi bir renk örneği */
-    background: rgba(0, 0, 0, 0.75);
-}
-
-.shop-icon {
-    width: 32px;
-    height: 32px;
-}
-
-.shop-links a img.shop-icon {
-    width: 50px;
-    height: 50px;
-    object-fit: contain;
-    margin-bottom: 6px;
-}
-
-
-.shop-links a:hover img.shop-icon {
-    transform: scale(1.1);
-}
-
-/* Sahibinden - Sarı ton */
-.shop-links a.sahibinden:hover {
-    border-color: #f1c40f;
-    box-shadow: 0 0 25px #f1c40f, 0 0 35px #d4ac0d;
-}
-
-/* Gardrops - Eflatun (morumsu) */
-.shop-links a.gardrops:hover {
-    border-color: #9b59b6;
-    box-shadow: 0 0 25px #9b59b6, 0 0 35px #7d3c98;
-}
-
-/* Dolap - Yeşilimsi */
-.shop-links a.dolap:hover {
-    border-color: #27ae60;
-    box-shadow: 0 0 25px #27ae60, 0 0 35px #1e8449;
-}
-
-
-
-/* Videolar */
-.video-gallery {
+/* Buton Stilleri */
+.player-container button {
+    background: none;
+    border: none;
+    color: #fff;
+    cursor: pointer;
     display: flex;
-    flex-direction: column; /* Videoları alt alta koymak için */
-    align-items: center; /* Ortalamak için */
-    gap: 30px; /* Videolar arası boşluk */
-    padding: 20px 0 40px 0; /* Üst ve alt boşluk */
-    max-width: 100%;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+    transition: transform 0.2s, color 0.2s;
+}
+.player-container button:hover {
+    color: var(--accent-color);
+    transform: scale(1.1);
+}
+.player-container .material-icons { font-size: 28px; }
+
+/* Süre Bilgisi */
+.duration-container {
+    color: #ddd;
+    font-size: 14px;
+    font-weight: 500;
+    margin-left: 5px;
 }
 
-.video-gallery::-webkit-scrollbar {
-    display: none;
+/* --- Timeline (Zaman Çubuğu) --- */
+.timeline-container {
+    width: 100%; height: 5px;
+    background: rgba(255, 255, 255, 0.2);
+    cursor: pointer;
+    border-radius: 5px;
+    position: relative;
+    margin-bottom: 5px;
 }
+.timeline {
+    height: 100%;
+    background: var(--accent-color);
+    width: 0%;
+    border-radius: 5px;
+    position: relative;
+}
+.timeline::after {
+    content: '';
+    position: absolute;
+    right: -6px; top: 50%;
+    transform: translateY(-50%);
+    width: 12px; height: 12px;
+    background: #fff;
+    border-radius: 50%;
+    box-shadow: 0 0 5px rgba(0,0,0,0.5);
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+.timeline-container:hover .timeline::after { opacity: 1; }
 
-.video-item {
-    width: 100%; /* Container genişliği, dilersen %100 veya max-width ile de ayarlayabilirsin */
-    max-width: 1080px; /* 1920x1080'e uygun maksimum genişlik */
-    background-color: rgba(0, 0, 0, 0.5);
+/* --- Ayarlar Menüsü (Düzeltilmiş) --- */
+.settings-menu {
+    position: absolute;
+    bottom: 60px;
+    right: 15px;
+    width: 220px;
+    background-color: rgba(20, 20, 20, 0.98); /* Koyu Siyah */
+    border: 1px solid rgba(255, 255, 255, 0.15);
     border-radius: 12px;
-    padding: 60px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.7);
+    padding: 0;
+    z-index: 200;
+    box-shadow: 0 5px 25px rgba(0,0,0,0.8);
+    overflow: hidden;
+    transform-origin: bottom right;
+    transition: all 0.2s ease;
+    opacity: 1;
+    transform: scale(1);
+    text-align: left;
+}
+
+.settings-menu.hidden {
+    opacity: 0;
+    transform: scale(0.9);
+    pointer-events: none;
+}
+
+.menu-header {
+    padding: 12px 15px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #fff;
+    background: rgba(255,255,255,0.05);
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.menu-header.is-back-button { cursor: pointer; }
+.menu-header.is-back-button:hover { background: rgba(255,255,255,0.1); }
+
+.menu-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 15px;
+    cursor: pointer;
+    color: #eee;
+    font-size: 13px;
+    border-bottom: 1px solid rgba(255,255,255,0.03);
+    transition: background 0.2s;
+}
+.menu-item:last-child { border-bottom: none; }
+.menu-item:hover { background-color: rgba(255, 255, 255, 0.1); }
+
+.menu-item .label {
+    display: flex; align-items: center; gap: 10px;
+    font-weight: 500;
+}
+.menu-item .label .material-icons { font-size: 18px; color: var(--accent-color); }
+
+.menu-item .value {
+    color: #aaa;
+    display: flex; align-items: center; gap: 5px;
+}
+
+.menu-item.active { background: rgba(108, 92, 231, 0.15); }
+.menu-item.active .label { color: var(--accent-color); font-weight: 600; }
+
+/* Loading Spinner */
+.loading-spinner {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 50px; height: 50px;
+    border: 3px solid rgba(255,255,255,0.1);
+    border-top-color: var(--accent-color);
+    border-radius: 50%;
+    animation: spin 1s infinite linear;
+    display: none;
+    z-index: 50;
+}
+.player-container.loading .loading-spinner { display: block; }
+
+@keyframes spin { to { transform: translate(-50%, -50%) rotate(360deg); } }
+/* =========================================
+   7. DEMO BUTONU ÖZEL STİLLERİ
+========================================= */
+
+.demo-wrapper {
+    width: 100%;
+    margin-top: 15px;
+}
+
+.demo-btn {
+    width: 100%;
+    padding: 15px;
+    border-radius: 12px;
+    /* Varsayılan Morumsu Arka Plan */
+    background: rgba(108, 92, 231, 0.15); 
+    border: 1px solid rgba(108, 92, 231, 0.4);
     color: white;
     display: flex;
-    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); /* Yumuşak geçiş */
+    position: relative;
+    overflow: hidden;
+}
+
+/* --- HOVER EFEKTİ (OLAY BURADA) --- */
+.demo-btn:hover {
+    /* Arka plan biraz daha parlasın */
+    background: rgba(108, 92, 231, 0.3);
+    /* Kenarlık tam mor olsun */
+    border-color: #6c5ce7;
+    /* Kutu yukarı kalksın */
+    transform: translateY(-5px);
+    /* EFSANE NEON PARLAMA */
+    box-shadow: 0 0 25px rgba(108, 92, 231, 0.6);
+}
+
+/* İçerik Düzeni */
+.demo-content-left {
+    display: flex;
+    align-items: center;
     gap: 15px;
 }
 
-/* Başlık videonun üstünde */
-.video-item h3 {
-    margin: 0;
-    font-size: 20px;
-    font-weight: 700;
-    text-align: center;
-    text-transform: uppercase;
-}
-
-/* Video iframe */
-.video-item iframe {
-    width: 100%; /* Konteyner genişliğini kaplar */
-    aspect-ratio: 16 / 9; /* 1920x1080 için ideal oran */
-    border-radius: 12px;
-    border: none;
-}
-
-/* Açıklama video altında */
-.video-item p {
-    text-align: left; /* Sol hizala */
-    margin: 0;
-}
-
-.video-item div {
-    text-align: left; /* İçerik sol hizalanır */
-}
-
-/* Kampanya Blokları */
-.campaign-container {
+/* Play İkon Kutusu */
+.play-icon-box {
+    background: #6c5ce7;
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
     display: flex;
+    align-items: center;
     justify-content: center;
-    gap: 40px;
-    margin-top: 30px;
-    flex-wrap: wrap;
+    font-size: 1.2rem;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    transition: transform 0.3s;
 }
 
-.campaign-item {
-    position: relative;
-    width: 280px;
-    background: linear-gradient(135deg, #ff416c, #ff4b2b);
-    border-radius: 20px;
-    overflow: hidden;
-    cursor: pointer;
-    box-shadow: 0 0 25px rgba(255, 75, 43, 0.8);
-    color: white;
+/* Hover'da ikon biraz büyüsün */
+.demo-btn:hover .play-icon-box {
+    transform: scale(1.1) rotate(5deg);
+}
+
+.text-group {
+    text-align: left;
+}
+
+.demo-title {
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+.demo-subtitle {
+    font-size: 0.75rem;
+    opacity: 0.7;
+}
+
+/* Ok İşareti */
+.arrow-icon {
+    font-size: 1.2rem;
+    transition: transform 0.3s ease;
+}
+
+/* Hover'da ok sağa kaysın */
+.demo-btn:hover .arrow-icon {
+    transform: translateX(5px);
+    color: #6c5ce7;
+}
+
+.footer {
+    margin-top: 50px;
+    font-size: 0.75rem;
+    color: rgba(255,255,255,0.4);
+    text-shadow: 0 2px 4px rgba(0,0,0,0.8);
     text-align: center;
-    padding: 15px;
-    transition: box-shadow 0.6s ease;
-}
-
-.campaign-item:hover {
-    box-shadow:
-      0 0 30px 5px rgba(255, 75, 43, 0.9),
-      0 0 50px 10px rgba(255, 165, 0, 0.7);
-    animation: shimmer 2.5s infinite;
-}
-
-.campaign-item img {
-    width: 100%;
-    border-radius: 15px;
-    margin-bottom: 10px;
-}
-
-.campaign-item h3 {
-    margin: 0 0 10px 0;
-    font-size: 22px;
-    text-transform: uppercase;
-}
-
-.campaign-item p {
-    font-size: 15px;
-}
-
-/* Şeffaf scrollbar */
-body::-webkit-scrollbar {
-    width: 8px;
-}
-
-body::-webkit-scrollbar-track {
-    background: transparent;
-}
-
-body::-webkit-scrollbar-thumb {
-    background-color: rgba(255, 255, 255, 0.3);
-    border-radius: 10px;
-    border: 2px solid transparent;
-    background-clip: content-box;
-}
-
-.content-area {
-    padding-bottom: 30px;
-}
-
-
-
-
-/* Parıltı Animasyonu */
-@keyframes shimmer {
-    0% {
-        box-shadow:
-          0 0 30px 5px rgba(255, 75, 43, 0.9),
-          0 0 50px 10px rgba(255, 165, 0, 0.7);
-    }
-    50% {
-        box-shadow:
-          0 0 45px 8px rgba(255, 75, 43, 1),
-          0 0 70px 15px rgba(255, 165, 0, 1);
-    }
-    100% {
-        box-shadow:
-          0 0 30px 5px rgba(255, 75, 43, 0.9),
-          0 0 50px 10px rgba(255, 165, 0, 0.7);
-    }
-}
-
-@media (max-width: 650px) {
-    body {
-        overscroll-behavior: none;
-        height: 100%;
-    }
-
-    html {
-        height: 100%;
-    }
-
-
-    .container {
-        padding: 20px 10px;
-        height: auto;
-    }
-
-    .video-background {
-        height: 100%;
-    }
-
-    .photo img {
-        height: 200px;
-        width: 200px;
-    }
-
-    .intro p {
-        font-size: 22px;
-        padding: 10px;
-        text-align: center;
-    }
-
-    .social-media {
-        flex-direction: column;
-        align-items: center;
-        gap: 15px;
-        margin: 30px 0;
-    }
-
-    .social-media a {
-        flex-direction: row;
-        align-items: center;
-        justify-content: flex-start;
-        width: 85%;
-        max-width: 250px;
-        gap: 12px;
-        padding: 10px 15px;
-        background-color: rgba(0, 0, 0, 0.6);
-        border-radius: 10px;
-        box-shadow: none;
-        transform: none;
-        transition: none;
-    }
-
-    .social-media a img {
-        width: 50px !important;
-        height: 50px !important;
-        margin: 0;
-        transform: none;
-    }
-
-    .menu-buttons {
-        flex-direction: column;
-        width: 90%;
-        padding: 0;
-        gap: 15px;
-        background-color: transparent;
-        margin-top: 10px;
-        border-radius: 0;
-    }
-
-    .menu-buttons button {
-        flex: none;
-        width: 100%;
-        font-size: 16px;
-        padding: 12px 15px;
-        border-radius: 12px;
-        background: rgba(225, 48, 108, 0.15);
-        border: 1.8px solid rgba(225, 48, 108, 0.55);
-        box-shadow: none;
-        transform: none;
-        transition: none;
-        cursor: pointer;
-    }
-
-    .campaign-container {
-        flex-direction: column;
-        align-items: center;
-        gap: 25px;
-    }
-
-    .video-gallery {
-        flex-direction: column;
-        align-items: center;
-        overflow-x: hidden;
-        overflow-y: auto;
-    }
-
-    .video-item {
-        width: 95%;
-        padding: 10px;
-    }
-
-    .shop-links {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .shop-links a {
-        width: 90%;
-        max-width: 300px;
-        height: auto;
-        padding: 10px 0;
-        flex-direction: row;
-        justify-content: flex-start;
-        gap: 10px;
-        margin: 0 auto;
-    }
-
-    .shop-icon {
-        margin-bottom: 0;
-        width: 32px;
-        height: 32px;
-    }
-    
-    .campaign-item {
-        box-shadow: none !important;
-        transform: none !important;
-        border-color: transparent !important;
-        background: rgba(0, 0, 0, 0.5) !important;
-        transition: none !important;
-    }
-
-    .shop-links a img.shop-icon,
-    .campaign-item img,
-    .menu-buttons button:hover,
-    .social-media a:hover,
-    .shop-links a:hover,
-    .campaign-item:hover {
-        transform: none !important;
-        box-shadow: none !important;
-        border-color: transparent !important;
-    }
 }
