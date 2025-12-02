@@ -41,17 +41,22 @@ body {
     position: fixed;
     top: 0; 
     left: 0;
-    width: 100%; 
-    height: 100%;
+    width: 100%;
+    
+    /* İŞTE ÇÖZÜM BURASI */
+    height: 100vh; /* Eski tarayıcılar için yedek */
+    height: 100svh; /* "Small Viewport Height" - Adres çubuğunu yok sayar ve sabit kalır */
+    
     z-index: -1;
-    background-color: #000; /* Video yüklenene kadar siyah kalsın */
+    background-color: #000;
+    pointer-events: none; /* Arka planın kaydırmayı engellememesi için garanti önlem */
 }
 
 .video-bg video {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Ekranı doldur, taşanı kes, ASLA esnetme */
-    object-position: center; /* Hep merkezi göster */
+    object-fit: cover; /* Ekranı doldurur, asla büzülmez */
+    object-position: center;
     display: block;
 }
 
